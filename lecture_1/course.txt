@@ -1,0 +1,159 @@
+# Terms
+- sentence  
+ -an assertion about the world in a knowledge representation language
+
+----------------------
+Propositional logic|
+----------------------
+-- proposition symbols (P Q R)
+-- logical connectives( not, and, or, implication, biconditional)
+
+- Model
+assignment of a truth value to every propositional symbol(a 'possible world')  
+	P: It is raining
+	Q: It is a tuesday
+	Truth model {P=true,Q=false}
+
+- Knowledge base 
+a set of sentences known by a knowledge-based agent
+
+- Entailment (a |= b)
+In every model in which sentence a is true, sentence b is also true
+
+- Inference 
+The process of deriving new sentences from old ones
+
+- Inference algorithm
+Does KB |= a ?(base on the KB can we conclu that a is true)
+
+-- Model Checking (algorith)
+	To determine if KB |= a:
+		Enumerate all possible models.
+		If in every model where KB is true, a is true, then KB entails a.
+		Otherwise, KB does not entail a.
+
+
+
+- Inference Rules (algorith)
+ex
+	Modus Ponens a -> b, a / b
+	And Elimination a^b / a
+	Double Negation Elimination ¬(¬a) / a
+	Implication Elimination a->b / ¬a or b
+	Biconditional Elimination a<->b / (a->b) ^ (b->a)
+	De Morgan's Law ¬(a ^ b) / ¬a v ¬b
+	De Morgan's Law ¬(a v b) / ¬a ^ ¬b
+	Distributive Property (a ^ (b v y)) / (a ^ b) v (a ^ y)
+	Distributive Property (a v (b ^ y)) / (a v b) ^ (a v y)
+	
+
+
+- Search Problems
+	initial state
+	actions
+	transition model
+	goal test
+	path cost function
+
+
+- Theorem Proving
+	intial state: starting knowledge base
+	actions: inference rules
+	transition model: new knowledge base after inference
+	goal test: check statement we're trying to prove
+	path cost function: number of steps in proof
+
+
+- ..
+	P v Q, ¬P / Q
+	P v Q1 v Q2 v .. v Qn, ¬P / Q1 v Q2 v .. v Qn
+	P v Q, ¬P v R / Q v R
+	P v Q1 v Q2 v .. v Qn, ¬P v R1 v R2 v .. v Rm / Q1 v Q2 v .. v Qn v R1 V R2 v .. v Rm	
+
+Clause 
+a disjunction of literals
+e.g P v Q v R 
+
+
+Conjunction normal form
+logical sentence that is a conjunction of clauses
+e.g. (A v B v C) ^ (D v ¬E) ^ (F v G)
+
+
+Conversion to CNF
+	formule
+		Eliminate biconditionals
+			turn (a <-> b) into (a -> b) ^ (b ->a)	
+		Eliminate implications
+			turn (a -> b) into ¬a v b
+		Move ¬inwards using De Morgan's Laws
+			e.g. turn ¬(a ^ b) into ¬a v ¬b
+		Use distributive law into distribute v wherever possible
+	
+	e.g.
+		(P v Q) -> R
+	    ¬(P v Q) v R #eliminate implication
+		(¬P ^ ¬Q) v R #De Morgan's Law
+		(¬P v R) ^ (¬Q v R) #distributive law
+		
+
+Inference Resolution
+	e.g. 
+		P v Q, ¬P v R / (Q v R)
+		P v Q v S, ¬P v R v S / (Q v R v S)	
+		P, ¬P / ()
+	
+	steps
+		To determine if KB |= a:
+			Check if (KB ^ ¬a) is a contradiction?
+				If so, then KB |= a.
+				Otherwise, not entailment	
+
+	To determine if KB |= a:
+		Convert (KB ^ ¬a) to Conjunctive Normal Form
+		Kepp checking to see if we can use resolution to produce a new clause.
+			If ever we produce the empty clause (equivalent to False), we have a contradiction, and KB |= a
+		Otherwise, if we can't add new clauses, no entailment.			
+		
+	e.g.
+		Does (A v B) ^ (¬B v C) ^ (¬C) entail A?
+		(A v B) ^ (¬B v C) ^ (¬C) ^ (¬A) #we can resolve (¬B v C), (¬C) to have (¬B)
+		(A v B) ^ (¬B v C) ^ (¬C) ^ (¬A) ^ (¬B) #we can resolve (A v B), (¬B) to have (A)
+		(A v B) ^ (¬B v C) ^ (¬C) ^ (¬A) ^ (¬B) ^ (A) "we can resolve (¬A), (A) to () , what mean contradition
+		(A v B) ^ (¬B v C) ^ (¬C) ^ (¬A) ^ (¬B) ^ (A) ^ () #contradiction
+
+
+------------------
+First-Order Logic|
+------------------
+- Constant Symbol
+e.g. (Menerva, Pomona, Horace, Gilderoy, Ravenclaw)
+- Predicate Symbol
+e.g. (Person, House, BelongsTo)
+
+E.G.
+Person(Minerva) #Minerva is person.
+House(Gryffindor) # Gryffindor is a house.
+¬House(Minerva) # Minerva is not a house.
+BelongsTo(Minerva, Gryffindor) # Minerva belongs to Gryffindor.
+
+
+- Universal Quantification
+	Vx(for all value of x). BelongsTo(x, Gryffindor) -> ¬BelongsTo(x, Hufflepuff)
+	#for all objects x, if x belongs to Gryffindor, then x does not belong to Hufflepuff.
+	#Anyone in Gryffindor is not in Hufflepuff.
+		
+- Existential Quantification
+	-]x. House(x) ^ BelongsTo(Minerva, x)
+	# There exists an object x such that x is a house and Minerva belongs to x
+	# Minerva belongs to a house
+	e.g.
+		Vx. Person(x) -> (-]y. House(y) ^ BelongsTo(x, y))
+		# For all objects x, if x is a person, then there exists an object y such that y is a house and x belongs to y
+		# Every person belongs to a house
+
+
+
+
+
+
