@@ -1,0 +1,182 @@
+---------------
+| UNCERTAINTY |
+---------------
+Base on probability theory
+
+- Possible worlds (omega w)
+P(w) -> probabity of some worlds represented by omega (w)
+
+- O <=P(w) <= 1 (between the lower and the higher possible value)
+E P(w) = 1
+w e gama
+
+e.g. P([..]) = 1/6
+
+- about 2 dyes
+P([7]) = 6/36 = 1/6
+P([12]) = 1/36 
+
+Unconditional probability 
+degree of belief in a proposition in the absence of any other evidence
+e.g. (to row 1 or 2 dyes)
+
+
+Conditional probability
+degree of belief in a proposition given some evidence that has already bee revealed
+P(a|b) (probability of a is true knowned that b is true)
+P(rain today | rain yesterday)
+P(disease | test results)
+
+formula
+	P(a|b) = P(a ^ b) / P(b)
+
+
+e.g.
+- calculate P(sum 12|red dy is 6) 
+P(red dy 6) = 1/6
+P(sum 12 ^ red dy 6) = 1/36
+P(sum 12 | red dy 6) = 1/6
+
+
+
+P(a|b) = P(a ^ b) / P(b)
+P(a ^ b) = P(b)P(a|b)
+P(a ^ b) = P(a)P(b|a)
+
+
+
+Random variable
+a variable in probability theory with a domain of possible values it can take one.g. Roll {1, 2, 3, 4, 5, 6}
+	 Weather {sun, cloud, rain, wind, snow}
+	 Traffic {none, light, heavy}
+	 Flight {on time, delayed, cancelled}
+
+
+Probalility distribution
+P(Flight = on time) = 0.6
+P(Flight = delayed) = 0.3
+P(Flight = cancelled) = 0.1
+as vector
+P(Flight) = < 0.6, 0.3, 0.1 >
+
+Idependence
+the knowledge that one event occurs does not affect the probability of the other event
+P(a ^ b) = P(a)P(b|a)
+P(a ^ b) = P(a)P(b) # if a & b are independent
+e.g.
+P(red dy 6 ^ blue dy 6) = P(red dy 6)P(blue dy 6) = (1/6).(1/6) = 1/36
+
+#
+P(red dy 6 ^ red dy 4) != P(red dy 6)P(blue dy 4) # because the are dependents
+P(red dy 6 ^ red dy 4) != P(red dy 6)P(red dy 4 | red dy 6) = (1/6).0 = 0
+
+Bayes' Rule
+P(a ^ b) = P(b) P(a|b)
+P(a ^ b) = P(a) P(b|a)
+P(b)P(a | b) = P(a) P(b | a)
+P(b | a) = ( P(b) P(a | b) ) / P(a) ) # give by dividing all by P(a)
+
+
+AM & PM
+Given clouds in the morning, what's the probability of rain in the afternoon?
+- 80% of rainy afternoons start with cloudy mornings
+- 40% of days have cloudy mornings.
+- 10% Of days have rainy afternoons
+P(rain | clouds) = P(clouds | rain)P(rain) /P(clouds) = (.8)(.1) / .4 
+
+Knowing
+	#P(visible effect | unknown cause)
+	P(cloudy morning | rainy afternoon)
+	P(medical test result | disease)
+We can calculate
+	#P(unknown cause | visible effect) 
+	P(rainy afternoon | cloudy morning)
+	P(disease | medical test result)
+
+
+	
+Join Probability
+		 AM
+C = cloud | C = ¬cloud
+	.4			.6
+
+		PM
+R = rain | R = ¬rain
+	.1		  .9
+
+#join 
+					(AM & PM)
+			R = rain  |  R = ¬rain
+ C = cloud	   .008			 .32
+C = ¬cloud	   .002			 .58
+
+
+P(C | rain) = P(C, rain) / P(rain)# , mean and
+			= aP(C, rain) # P(rain) as a constant	
+			= a<.08, .02> # .08, .02 don't give 1 so with a = 10 <.8, .2> give 1
+
+
+
+Probability Rules
+- Negatioin rule
+P(¬a) = 1 - P(a)
+
+- Inclusion-Exclusioin
+P(a v b) = P(a) + P(b) - P(a ^ b)
+
+- Marginalization
+P(a) = P(a, b) + P(a, ¬b)
+P(X = xi) = Ej (P(X = xi, Y = yj)) #formula sum of P(X= xi, Y = yj) where j as possible values what Y can take 
+e.g.(with the cloud, rain table)
+P(C = cloud) = P(C = cloud, R = rain) + P(C = cloud, R = ¬rain) = .08 + .32 = .40
+
+- Conditioning
+P(a) = P(a | b)P(b) + P(a | ¬b)P(¬b)
+P(X = xi) = Ej ( P(X = xi | Y = yj)P(Y = yj)
+
+
+
+
+
+
+Bayesian network
+data structure that represents the dependencies among random variables
+
+- structure
+directed graph
+each node represents a random variable
+arrow from X to Y means X is a parent of Y
+each nod X has probability distribution P(X | Parents(X)
+
+e.g. 
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
